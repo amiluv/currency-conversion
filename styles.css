@@ -1,0 +1,146 @@
+
+p {
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px #888;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+#amount{
+    width: 95%;
+    
+}
+
+input[type="submit"] {
+    background-color: #5471f1;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+input[type="submit"]:hover {
+    background-color: #3729b6;
+}
+
+#proceed-button {
+    background-color: #31f752;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    display: inline-block;
+    float: right;
+}
+
+#proceed-button:hover {
+    background-color: #0e8a23;
+}
+/* Style to clear any floats within the form */
+#exchange-form::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Container for the cryptocurrency data */
+#cryptoRates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+#result{
+    display: flex;
+    color: #0066cc;
+}
+
+/* Individual cryptocurrency data item */
+.crypto-rate {
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    width: 100%;
+    justify-content: space-between;
+    text-align: center;
+    margin: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Cryptocurrency name */
+.crypto-symbol {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Price */
+.crypto-price {
+    font-size: 16px;
+    padding-left: 50px;
+    color: #009933; /* Green color */
+}
+
+/* 24-hour volume */
+.crypto-volume {
+    font-size: 14px;
+    margin-top: 10px;
+    padding-left: 50px;
+    color: #0066cc; /* Blue color */
+}
+
+/* Market cap */
+.crypto-market-cap {
+    font-size: 14px;
+    margin-top: 10px;
+    padding-left: 50px;
+    color: #ff6600; /* Orange color */
+}
