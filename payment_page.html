@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #2B2A4C;
         }
         .container {
             width: 80%;
@@ -22,10 +22,13 @@
         h1 {
             text-align: center;
         }
+        h4{
+            color: #4d4b8b;
+        }
         .payment-details {
             margin-top: 20px;
             padding: 20px;
-            background-color: #f9f9f9;
+            background-color: #dfdfc7;
             border-radius: 8px;
         }
         .payment-details p {
@@ -42,8 +45,8 @@
         .rec_wallet {
             font-size: 18px;
             word-break: break-all;
-            border-radius: 10px;
-            width: auto;
+            border-radius: 5px;
+            width: 30%;
         }
         .proceed-btn {
             display: block;
@@ -65,18 +68,26 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Payment Details</h1>
-        <div class="payment-details">
-            <p>Amount to be Paid: <span class="amount" id="amountToPay"></span></p><br>
-            <p>Your Wallet Address: </p>
-            <p class="wallet-address" id="walletAddress"></p><br>
-            <label for="rec_wallet">Where do we send the token</label>
-            <input type="text"  class="rec_wallet" placeholder="Paste the recieving wallet">
+    <div class="bg-img">
+        <div class="container">
+            <h1>Payment Details</h1>
+            
+            <div class="payment-details">
+                <h4>Company name: PULMP EXCHANGE</h4>
+                <h4>Company website: www.pulmpechange.com</h4>
+                <p>Amount to be Paid: <span class="amount" id="amountToPay"></span></p><br>
+                <p>Pay to this address:</p>
+                <p class="wallet-address" id="walletAddress"></p><br>
+                <div class="qrcode-container" id="qrcode"></div>
+                <label for="rec_wallet">Where do we send the token</label>
+                <input type="text" class="rec_wallet" placeholder="Paste the recieving wallet here">
+            </div>
+            <button class="proceed-btn" onclick="processPayment()">I have made Payment</button>
         </div>
-        <button class="proceed-btn" onclick="processPayment()">I have made Payment</button>
     </div>
+    
 
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
     <script>
         function processPayment() {
             // Logic to process payment can be added here if needed
@@ -84,17 +95,28 @@
             setTimeout(function() {
                 window.location.href = 'thank_you.html';
             }, 3000);
-            // You can redirect the user to a success page or perform further actions after payment
+            
         }
 
         // Retrieve URL parameters and set payment details
-        const urlParams = new URLSearchParams(window.location.search);
-        const amount = urlParams.get('amount');
-        const currency = urlParams.get('currency');
-        const address = urlParams.get('address');
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const amount = urlParams.get('amount');
+            const currency = urlParams.get('currency');
+            const address = urlParams.get('address');
 
-        document.getElementById('amountToPay').textContent = `${amount} ${currency}`;
-        document.getElementById('walletAddress').textContent = address;
+            document.getElementById('amountToPay').textContent = `${amount} ${currency}`;
+            document.getElementById('walletAddress').textContent = address;
+
+            // Generate QR code for the wallet address
+            const qrCodeElement = document.getElementById('qrcode');
+            new QRCode(qrCodeElement, {
+                text: address,
+                width: 128,
+                height: 128,
+            });
+        })
+        
     </script>
 </body>
 </html>
