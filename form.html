@@ -1,0 +1,79 @@
+<!--form action="https://perfectmoney.com/api/step1.asp" method="POST">
+    <input type="hidden" name="PAYEE_ACCOUNT" value="U41039047">
+    <input type="hidden" name="PAYEE_NAME" value="Pulmp Exchange">
+    <input type="text" name="PAYMENT_ID" value=""><BR>
+    <input type="text" name="PAYMENT_AMOUNT" value=""><BR>
+    <input type="hidden" name="PAYMENT_UNITS" value="USD">
+    <input type="hidden" name="STATUS_URL" value="info@pulmpexchange.com">
+    <input type="hidden" name="PAYMENT_URL" value="https://pulmpexchange.com/my-account/">
+    <input type="hidden" name="PAYMENT_URL_METHOD" value="LINK">
+    <input type="hidden" name="NOPAYMENT_URL" value="https://pulmpexchange.com/">
+    <input type="hidden" name="NOPAYMENT_URL_METHOD" value="LINK">
+    <input type="hidden" name="SUGGESTED_MEMO" value="">
+    <input type="hidden" name="BAGGAGE_FIELDS" value="">
+    <input type="submit" name="PAYMENT_METHOD" value="Pay_Now!">
+</form-->
+
+
+
+// Retrieve the result from the resultContainer
+                    const resultContainer = document.getElementById('result');
+                    const resultText = resultContainer.textContent;
+
+                    // Extract the amount from the result text
+                    const regex = /Result: (\d+(\.\d+)?) (\S+) = (\d+(\.\d+)?) (\S+)/;
+                    const matches = resultText.match(regex);
+
+                    if (matches && matches.length === 7) {
+                        const amount = matches[1];
+                        const fromCurrency = matches[3];
+                        const toCurrency = matches[5];
+
+                        // Encode the company name and other parameters for the Perfect Money URL
+                        const encodedCompanyName = encodeURIComponent('Pulmp Exchange');
+                        const encodedAmount = encodeURIComponent(amount);
+
+                        // Create a hidden form element
+                        const form = document.createElement('form');
+                        form.setAttribute('action', 'https://perfectmoney.com/api/step1.asp');
+                        form.setAttribute('method', 'POST');
+                        form.style.display = 'none';
+
+                        // Define form fields and values
+                        const fields = {
+                            PAYEE_ACCOUNT: 'U41039047',
+                            PAYEE_NAME: encodedCompanyName,
+                            PAYMENT_ID: '12345', // Replace with your preferred payment ID
+                            PAYMENT_AMOUNT: encodedAmount,
+                            PAYMENT_UNITS: toCurrency,
+                            STATUS_URL: 'info@pulmpexchange.com', // Replace with your preferred status URL
+                            PAYMENT_URL: 'https://pulmpexchange.com/my-account/', // Replace with your preferred payment URL
+                            PAYMENT_URL_METHOD: 'LINK',
+                            NOPAYMENT_URL: 'https://pulmpexchange.com/', // Replace with your preferred no payment URL
+                            NOPAYMENT_URL_METHOD: 'LINK',
+                            SUGGESTED_MEMO: '', // Replace with your preferred memo
+                            BAGGAGE_FIELDS: '',
+                            PAYMENT_METHOD: 'Pay_Now!'
+                        };
+
+                        // Loop through fields and create input elements
+                        for (const fieldName in fields) {
+                            if (fields.hasOwnProperty(fieldName)) {
+                                const input = document.createElement('input');
+                                input.type = 'hidden';
+                                input.name = fieldName;
+                                input.value = fields[fieldName];
+                                form.appendChild(input);
+                            }
+                        }
+
+                        // Append the form to the document
+                        document.body.appendChild(form);
+
+                        // Submit the form
+                        form.submit();
+                    }
+
+
+//"https://perfectmoney.is/api/step1.asp?PAYEE_ACCOUNT=U41039047&PAYEE_NAME=Pulmp%20Exchange&PAYMENT_ID=12345&PAYMENT_AMOUNT=10&PAYMENT_UNITS=USD&PAYMENT_BATCH_NUM=12345&PAYMENT_URL=https%3A%2F%2Fyourwebsite.com%2Fsuccess.html"  //`https://perfectmoney.is/payment_new.html?PAYEE_ACCOUNT=U41039047` 
+                        `https://perfectmoney.is/api/step1.asp?PAYEE_ACCOUNT=U41039047&PAYEE_NAME=Pulmp%20Exchange&PAYMENT_ID=12345&PAYMENT_AMOUNT=${amount}&PAYMENT_UNITS=${fromCurrency}&PAYMENT_BATCH_NUM=12345`;
