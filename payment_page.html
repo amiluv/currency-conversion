@@ -40,7 +40,7 @@
             margin: 10px 0;
         }
         .amount {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
         }
         .wallet-address {
@@ -48,17 +48,17 @@
             word-break: break-all;
         }
         .rec_wallet {
-            font-size: 18px;
+            font-size: 15px;
             word-break: break-all;
             border-radius: 3px;
-            width: 70%;
-            margin-bottom: 20px;
+            width: 100%;
+            margin: 5px 0 20px 0;
         }
         .email {
-            font-size: 18px;
+            font-size: 15px;
             word-break: break-all;
             border-radius: 3px;
-            width: 70%;
+            width: 100%;
             margin-top: 5px;
         }
         .proceed-btn {
@@ -97,9 +97,9 @@
                     <p>Pay to this address:</p>
                     <p class="wallet-address" id="walletAddress"></p><br>
                     <label for="rec_wallet">Where do we send the token</label>
-                    <input type="text" class="rec_wallet" placeholder="Paste the recieving wallet here"><br>
+                    <input type="text" class="rec_wallet" placeholder="Paste the recieving wallet/account here" required><br>
                     <label for="email">Payer's email address</label>
-                    <input type="text" class="email" placeholder="enter your email address here">
+                    <input type="text" class="email" placeholder="enter your email address here" required>
                 </div>
                 
             </div>
@@ -127,7 +127,11 @@
             const currency = urlParams.get('currency');
             const address = urlParams.get('address');
 
-            document.getElementById('amountToPay').textContent = `${amount} ${currency}`;
+            if (currency === 'usd-coin'){
+                document.getElementById('amountToPay').textContent = `${amount} ${'perfect Money'}`;
+            }else {
+                document.getElementById('amountToPay').textContent = `${amount} ${currency}`;
+            }
             document.getElementById('walletAddress').textContent = address;
 
             // Generate QR code for the wallet address
