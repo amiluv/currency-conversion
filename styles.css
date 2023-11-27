@@ -8,10 +8,19 @@ p {
 }
 
 body {
-    font-family: Georgia, "Times New Roman", Times, serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: #2B2A4C;
     margin: 0;
     padding: 0;
+    
+}
+.goHome {
+    padding: 20px;
+}
+a{
+    text-decoration: none;
+    color: #fff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 h1 {

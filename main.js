@@ -36,7 +36,7 @@ function fetchCoinGeckoExchangeRates() {
     
         data.forEach((currencyData) => {
             const currencyName = currencyData.name;
-            const price = currencyData.current_price;
+            const price = currencyData.current_price * 1.05;
             const volume = currencyData.total_volume;
             const marketCap = currencyData.market_cap;
     
@@ -73,7 +73,12 @@ function fetchCoinGeckoExchangeRates() {
         
                     // Display the result and enable the Proceed button
                     const resultContainer = document.getElementById('result');
-                    resultContainer.textContent = `You will get: ${result.toFixed(5)} ${toCurrency.toUpperCase()}`;
+                    if (toCurrency === 'usd-coin'){
+                        resultContainer.textContent = `You will get: ${result.toFixed(5)} ${'PERFECT MONEY'}`;
+                    } else {
+                        resultContainer.textContent = `You will get: ${result.toFixed(5)} ${toCurrency.toUpperCase()}`;
+                    }
+                    
                     resultContainer.style.display = 'block';
                     document.getElementById('proceed-button').disabled = false;
         
@@ -81,7 +86,7 @@ function fetchCoinGeckoExchangeRates() {
                     document.getElementById('proceed-button').addEventListener('click', function() {
                         const amount = parseFloat(document.getElementById('amount').value);
                         const fromCurrency = document.getElementById('from_currency').value;
-                    
+                        
                         // Get wallet address based on the selected fromCurrency
                         let walletAddress = ' ';
                         if (fromCurrency === 'bitcoin') {
@@ -91,24 +96,25 @@ function fetchCoinGeckoExchangeRates() {
                         } else if (fromCurrency === 'tether') {
                             walletAddress = 'TVb8VMB3iGGkSTHG8k7MrYvrcUTmnc7EPc';
                         } else if (fromCurrency === 'tron') {
-                            walletAddress = 'TVb8VMB3iGGkSTHG8k7MrYvrcUTmnc7EPc';
+                            walletAddress = 'TBDAUKpTF1Tfk1UFmXsGoJ9UA5D8A7pVwK';
                         } else if (fromCurrency === 'usd-coin') {
                             walletAddress = 'U41039047';
                         } else if (fromCurrency === 'binance-peg-busd') {
                             walletAddress = '0x89c9D44Eb40876bb1F9A5cc30b0b7a0CA61A1E72';
                         } else if (fromCurrency === 'binancecoin') {
-                            walletAddress = 'bnb1sqt5p8kv5yjss6u5s0sv3mkmntf88t7hpas86f';
+                            walletAddress = '0x6219861499476b630f5859d69803d944d4b26025';
                         } else if (fromCurrency === 'dogecoin') {
-                            walletAddress = 'DMnchjQ9m7j5mhDDRAKofETbgZyyyWwivw';
+                            walletAddress = 'DNtGpsu8mp3nrAcP2WNeVnnTr5bZWw4UFD';
                         } else if (fromCurrency === 'cardano') {
-                            walletAddress = 'addr1q9hwgjwflx7wuykeh6tagpapsdy8r2cdnveclltf4vvawe4tq6npuceu9ql6vle4r68wjk8exldgxlmclrenrtvqd7yqmwful6';
-                        }else{
-                            return 'check your entries and try again!'
+                            walletAddress = 'addr1v8hxjs6pk7mx45y34we9nxxtkqdvfs9ez4jqawcklweknuqt34hwu';
+                        } else{
+                            return 'An error occured, check your entries and try again!'
                         }
                         // You'd add more conditions for other currencies as needed
                     
                         // Redirect to payment page with relevant details
-                        const paymentURL = `payment_page.html?amount=${amount}&currency=${fromCurrency}&address=${walletAddress}`;
+                        
+                        const paymentURL = `payment_page.html?amount=${amount}&currency=${fromCurrency}&address=${walletAddress}`;                       
                         window.location.href = paymentURL;
                     });
                     

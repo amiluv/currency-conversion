@@ -25,11 +25,16 @@
         h4{
             color: #4d4b8b;
         }
+      
         .payment-details {
             margin-top: 20px;
             padding: 20px;
             background-color: #dfdfc7;
             border-radius: 8px;
+            display: flex;
+        }
+        .details {
+            max-width: 100%;
         }
         .payment-details p {
             margin: 10px 0;
@@ -45,8 +50,16 @@
         .rec_wallet {
             font-size: 18px;
             word-break: break-all;
-            border-radius: 5px;
-            width: 30%;
+            border-radius: 3px;
+            width: 70%;
+            margin-bottom: 20px;
+        }
+        .email {
+            font-size: 18px;
+            word-break: break-all;
+            border-radius: 3px;
+            width: 70%;
+            margin-top: 5px;
         }
         .proceed-btn {
             display: block;
@@ -65,29 +78,38 @@
         .proceed-btn:hover {
             background-color: #45a049;
         }
+        .qrcode-container {
+            
+            float: right;
+            
+        }
     </style>
 </head>
 <body>
     <div class="bg-img">
         <div class="container">
             <h1>Payment Details</h1>
-            
             <div class="payment-details">
-                <h4>Company name: PULMP EXCHANGE</h4>
-                <h4>Company website: www.pulmpechange.com</h4>
-                <p>Amount to be Paid: <span class="amount" id="amountToPay"></span></p><br>
-                <p>Pay to this address:</p>
-                <p class="wallet-address" id="walletAddress"></p><br>
-                <div class="qrcode-container" id="qrcode"></div>
-                <label for="rec_wallet">Where do we send the token</label>
-                <input type="text" class="rec_wallet" placeholder="Paste the recieving wallet here">
+                <div class="details">
+                    <h4>Company name: PULMP EXCHANGE</h4>
+                    <h4>Company website: www.pulmpechange.com</h4>
+                    <p>Amount to be Paid: <span class="amount" id="amountToPay"></span></p><br>
+                    <p>Pay to this address:</p>
+                    <p class="wallet-address" id="walletAddress"></p><br>
+                    <label for="rec_wallet">Where do we send the token</label>
+                    <input type="text" class="rec_wallet" placeholder="Paste the recieving wallet here"><br>
+                    <label for="email">Payer's email address</label>
+                    <input type="text" class="email" placeholder="enter your email address here">
+                </div>
+                
             </div>
+            <div id="qrcode"></div>
             <button class="proceed-btn" onclick="processPayment()">I have made Payment</button>
         </div>
     </div>
     
 
-    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@latest"></script>
     <script>
         function processPayment() {
             // Logic to process payment can be added here if needed
