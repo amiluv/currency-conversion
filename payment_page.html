@@ -78,7 +78,7 @@
         .proceed-btn:hover {
             background-color: #45a049;
         }
-        .qrcode-container {
+        .qrcode {
             
             float: right;
             
@@ -97,29 +97,18 @@
                     <p>Pay to this address:</p>
                     <p class="wallet-address" id="walletAddress"></p><br>
                     <label for="rec_wallet">Where do we send the token</label>
-                    <input type="text" class="rec_wallet" placeholder="Paste the recieving wallet/account here" required><br>
+                    <input type="text" class="rec_wallet" placeholder="Paste the recieving wallet/account here"><br>
                     <label for="email">Payer's email address</label>
-                    <input type="text" class="email" placeholder="enter your email address here" required>
+                    <input type="email" class="email" placeholder="enter your email address here">
                 </div>
                 
             </div>
             <div id="qrcode"></div>
-            <button class="proceed-btn" onclick="processPayment()">I have made Payment</button>
+            <button class="proceed-btn">I have made Payment</button>
         </div>
     </div>
-    
-
     <script src="https://cdn.jsdelivr.net/npm/qrcode@latest"></script>
     <script>
-        function processPayment() {
-            // Logic to process payment can be added here if needed
-            alert('Payment processing...');
-            setTimeout(function() {
-                window.location.href = 'thank_you.html';
-            }, 3000);
-            
-        }
-
         // Retrieve URL parameters and set payment details
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -142,7 +131,96 @@
                 height: 128,
             });
         })
-        
+       
+
+        document.querySelector('.proceed-btn').addEventListener('click', function() {
+           
+            // Get payment details
+            const amountToPay = document.getElementById('amountToPay').textContent;
+            //const walletAddress = document.getElementById('walletAddress').textContent;
+            const recipientWallet = document.querySelector('.rec_wallet').value;
+            const payerEmail = document.querySelector('.email').value;
+
+            if (recipientWallet !== '' && payerEmail !== '') {
+                // Create an object with payment details
+                const paymentDetails = {
+                    amount: amountToPay,
+                    recipientWallet: recipientWallet,
+                    payerEmail: payerEmail
+                }
+                // Send payment details to the server to handle email sending
+                fetch('/send_payment_email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(paymentDetails)
+                })
+                .then(response => {
+                    // Handle response from the server if needed
+                    console.log('Email sent successfully');
+                })
+                .catch(error => {
+                    console.error('Error sending email:', error);
+                });
+                alert('Payment processing...');
+                /*setTimeout(function() {
+                    window.location.href = 'thank_you.html';
+                }, 3000);*/
+            } else {
+                // Show an error message or handle the case where values are not entered
+                alert('Recipient wallet and email address cannot be empty!');
+                document.querySelector('.rec_wallet').focus();
+                if (recipientWallet !== ''){
+                    document.querySelector('.email').focus();
+                }
+            }  
+        });
     </script>
 </body>
 </html>
+
+
+
+<!--script src="https://cdn.jsdelivr.net/npm/qrcode@latest"></script>
+    <script>
+        document.querySelector('.proceed-btn').addEventListener('click', function() {
+        // Get payment details
+        const amountToPay = document.getElementById('amountToPay').textContent;
+        //const walletAddress = document.getElementById('walletAddress').textContent;
+        const recipientWallet = document.querySelector('.rec_wallet').value;
+        const payerEmail = document.querySelector('.email').value;
+        
+        // Create an object with payment details
+        const paymentDetails = {
+            amount: amountToPay,
+            //walletAddress: walletAddress,
+            recipientWallet: recipientWallet,
+            payerEmail: payerEmail
+        };
+        
+        // Send payment details to the server to handle email sending
+        fetch('/send_payment_email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(paymentDetails)
+        })
+        .then(response => {
+            // Handle response from the server if needed
+            console.log('Email sent successfully');
+        })
+        .catch(error => {
+            console.error('Error sending email:', error);
+        });
+
+        function processPayment() {
+            // Logic to process payment can be added here if needed
+            alert('Payment processing...');
+            setTimeout(function() {
+                window.location.href = 'thank_you.html';
+            }, 3000);
+        }
+    });         
+    </script-->
