@@ -37,11 +37,15 @@
             max-width: 100%;
         }
         .payment-details p {
-            margin: 10px 0;
+            margin: 3px 0;
+            
         }
         .amount {
             font-size: 22px;
             font-weight: bold;
+        }
+        .countdown {
+            color: rgb(231, 29, 29);
         }
         .wallet-address {
             font-size: 18px;
@@ -60,6 +64,13 @@
             border-radius: 3px;
             width: 100%;
             margin-top: 5px;
+        }
+        #name {
+            font-size: 15px;
+            word-break: break-all;
+            border-radius: 3px;
+            width: 100%;
+            margin: 5px 0 20px 0;
         }
         .proceed-btn {
             display: block;
@@ -84,6 +95,12 @@
             
         }
     </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+    (function(){
+    emailjs.init("jgvcswlIBOZyfWJHc");
+    })();
+    </script>
 </head>
 <body>
     <div class="bg-img">
@@ -91,13 +108,18 @@
             <h1>Payment Details</h1>
             <div class="payment-details">
                 <div class="details">
+                    <h4>This payment window expires in 15minutes</h4>
+                    <div class="countdown">
+                        <p>Time remaining: <span id="timer"></span></p>
+                    </div>
                     <h4>Company name: PULMP EXCHANGE</h4>
-                    <h4>Company website: www.pulmpechange.com</h4>
                     <p>Amount to be Paid: <span class="amount" id="amountToPay"></span></p><br>
                     <p>Pay to this address:</p>
                     <p class="wallet-address" id="walletAddress"></p><br>
                     <label for="rec_wallet">Where do we send the token</label>
                     <input type="text" class="rec_wallet" placeholder="Paste the recieving wallet/account here"><br>
+                    <label for="name">Payer's Name</label>
+                    <input type="text" id="name" placeholder="enter your name here"><br>
                     <label for="email">Payer's email address</label>
                     <input type="email" class="email" placeholder="enter your email address here">
                 </div>
@@ -108,74 +130,6 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/qrcode@latest"></script>
-    <script>
-        // Retrieve URL parameters and set payment details
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const amount = urlParams.get('amount');
-            const currency = urlParams.get('currency');
-            const address = urlParams.get('address');
-
-            if (currency === 'usd-coin'){
-                document.getElementById('amountToPay').textContent = `${amount} ${'perfect Money'}`;
-            }else {
-                document.getElementById('amountToPay').textContent = `${amount} ${currency}`;
-            }
-            document.getElementById('walletAddress').textContent = address;
-
-            // Generate QR code for the wallet address
-            const qrCodeElement = document.getElementById('qrcode');
-            new QRCode(qrCodeElement, {
-                text: address,
-                width: 128,
-                height: 128,
-            });
-        })
-       
-
-        document.querySelector('.proceed-btn').addEventListener('click', function() {
-           
-            // Get payment details
-            const amountToPay = document.getElementById('amountToPay').textContent;
-            //const walletAddress = document.getElementById('walletAddress').textContent;
-            const recipientWallet = document.querySelector('.rec_wallet').value;
-            const payerEmail = document.querySelector('.email').value;
-
-            if (recipientWallet !== '' && payerEmail !== '') {
-                // Create an object with payment details
-                const paymentDetails = {
-                    amount: amountToPay,
-                    recipientWallet: recipientWallet,
-                    payerEmail: payerEmail
-                }
-                // Send payment details to the server to handle email sending
-                fetch('/send_payment_email', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(paymentDetails)
-                })
-                .then(response => {
-                    // Handle response from the server if needed
-                    console.log('Email sent successfully');
-                })
-                .catch(error => {
-                    console.error('Error sending email:', error);
-                });
-                alert('Payment processing...');
-                /*setTimeout(function() {
-                    window.location.href = 'thank_you.html';
-                }, 3000);*/
-            } else {
-                // Show an error message or handle the case where values are not entered
-                alert('Recipient wallet and email address cannot be empty!');
-                document.querySelector('.rec_wallet').focus();
-                if (recipientWallet !== ''){
-                    document.querySelector('.email').focus();
-                }
-            }  
-        });
-    </script>
+    <script src="payment.js"></script>
 </body>
 </html>
