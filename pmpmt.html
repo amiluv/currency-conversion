@@ -6,6 +6,23 @@
     <title>pmt form</title>
 </head>
 <body>
+    <div id="form">
+        <form action="https://perfectmoney.com/api/step1.asp" method="post">
+            <input type="hidden" name="PAYEE_ACCOUNT: U41039047"> 
+            <input type="hidden" name="PAYEE_NAME: encodedCompanyName">
+            <input type="hidden" name="PAYMENT_ID: 12345">
+            <input type="hidden" name="PAYMENT_AMOUNT: encodedAmount">
+            <input type="hidden" name="PAYMENT_UNITS: toCurrency">
+            <input type="hidden" name="STATUS_URL: info@pulmpexchange.com"> 
+            <input type="hidden" name="PAYMENT_URL: https://pulmpexchange.com/my-account/"> 
+            <input type="hidden" name="PAYMENT_URL_METHOD: LINK">
+            <input type="hidden" name="NOPAYMENT_URL: https://pulmpexchange.com/">
+            <input type="hidden" name="NOPAYMENT_URL_METHOD: LINK">
+            <input type="hidden" name="SUGGESTED_MEMO: ''">
+            <input type="hidden" name="BAGGAGE_FIELDS: ''">
+            <input type="hidden" name="PAYMENT_METHOD: Pay_Now!">
+        </form>
+    </div>
     <script>
         // Retrieve the result from the resultContainer
         const resultContainer = document.getElementById('result');
@@ -64,7 +81,6 @@
             // Submit the form
             form.submit();
         }
-
     </script>
 </body>
 </html>

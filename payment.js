@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (currency === 'usd-coin'){
         document.getElementById('amountToPay').textContent = `${amount} ${'perfect Money'}`;
+        window.location.href = 'pmpmt.html';
     }else {
         document.getElementById('amountToPay').textContent = `${amount} ${currency}`;
     }
