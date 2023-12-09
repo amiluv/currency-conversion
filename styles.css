@@ -22,7 +22,9 @@ a{
     color: #fff;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
+.input{
+    display: none;
+}
 h1 {
     text-align: center;
     padding: 20px;

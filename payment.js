@@ -41,14 +41,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const amount = urlParams.get('amount');
     const currency = urlParams.get('currency');
     const address = urlParams.get('address');
+    const network = urlParams.get('network')
 
     if (currency === 'usd-coin'){
         document.getElementById('amountToPay').textContent = `${amount} ${'perfect Money'}`;
-        window.location.href = 'pmpmt.html';
+        //window.location.href = 'pmpmt.html'
     }else {
         document.getElementById('amountToPay').textContent = `${amount} ${currency}`;
+        
     }
     document.getElementById('walletAddress').textContent = address;
+    document.getElementById('network').textContent = network;
 
     // Generate QR code for the wallet address
     const qrCodeElement = document.getElementById('qrcode');
@@ -61,62 +64,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 document.querySelector('.proceed-btn').addEventListener('click', function() {
-   
-    // Get payment details
-    const amountToPay = document.getElementById('amountToPay').textContent;
-    const name = document.getElementById('name').value;
-    const recipientWallet = document.querySelector('.rec_wallet').value;
-    const payerEmail = document.querySelector('.email').value;
-
-    if (recipientWallet !== '' && payerEmail !== '' && name !== '') {
-        // Create an object with payment details
-        const paymentDetails = {
-            amount: amountToPay,
-            name: name,
-            recipientWallet: recipientWallet,
-            payerEmail: payerEmail
-        }
-        //declear your service IDs
-        const serviceID = 'service_nc011go';
-        const templateID = 'template_k6o7h6l';
-
-        emailjs.send(serviceID,templateID,paymentDetails)
-        .then(res =>{
-            alert("Payment captured sucessfully, click 'OK' to proceed");
-            console.log('Email sent successfully');
-            setTimeout(function() {
-                window.location.href = 'thank_you.html';
-            }, 3000);
-        })
-
-
-        /*/ Send payment details to the server to handle email sending
-        fetch('pop.gmail.com', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(paymentDetails)
-        })
-        .then(response => {
-            // Handle response from the server if needed
-            console.log('Email sent successfully');
-        })
-        .catch(error => {
-            console.error('Error sending email:', error);
-        });
-        alert('Payment processing...');
-        /*setTimeout(function() {
-            window.location.href = 'thank_you.html';
-        }, 3000);*/
-    } else {
-        // Show an error message or handle the case where values are not entered
-        alert('All input fields are required!');
-        document.querySelector('.rec_wallet').focus();
-        if (recipientWallet !== ''){
-            document.getElementById('name').focus();
-        } else if (name !== ''){
-            document.querySelector('.email').focus();
-        }
-    }  
+    alert("Payment captured sucessfully, click 'OK' to proceed");
+    console.log('Email sent successfully');
+    setTimeout(function() {
+        window.location.href = 'thank_you.html';
+    }, 3000);
 });
+

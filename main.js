@@ -80,48 +80,95 @@ function fetchCoinGeckoExchangeRates() {
                     }
                     
                     resultContainer.style.display = 'block';
-                    document.getElementById('proceed-button').disabled = false;
+                    document.querySelector('.input').style.display = 'block';
+                   
         
-                    // Proceed button click event
-                    document.getElementById('proceed-button').addEventListener('click', function() {
-                        const amount = parseFloat(document.getElementById('amount').value);
-                        const fromCurrency = document.getElementById('from_currency').value;
-                        
-                        // Get wallet address based on the selected fromCurrency
-                        let walletAddress = ' ';
-                        if (fromCurrency === 'bitcoin') {
-                            walletAddress = 'bc1qsf946ej4thzae4xh76jxt4czwaeqjgushk0fdc';
-                        } else if (fromCurrency === 'ethereum') {
-                            walletAddress = '0x89c9D44Eb40876bb1F9A5cc30b0b7a0CA61A1E72';
-                        } else if (fromCurrency === 'tether') {
-                            walletAddress = 'TVb8VMB3iGGkSTHG8k7MrYvrcUTmnc7EPc';
-                        } else if (fromCurrency === 'tron') {
-                            walletAddress = 'TBDAUKpTF1Tfk1UFmXsGoJ9UA5D8A7pVwK';
-                        } else if (fromCurrency === 'usd-coin') {
-                            walletAddress = 'U41039047';
-                        } else if (fromCurrency === 'binance-peg-busd') {
-                            walletAddress = '0x89c9D44Eb40876bb1F9A5cc30b0b7a0CA61A1E72';
-                        } else if (fromCurrency === 'binancecoin') {
-                            walletAddress = '0x6219861499476b630f5859d69803d944d4b26025';
-                        } else if (fromCurrency === 'dogecoin') {
-                            walletAddress = 'DNtGpsu8mp3nrAcP2WNeVnnTr5bZWw4UFD';
-                        } else if (fromCurrency === 'cardano') {
-                            walletAddress = 'addr1v8hxjs6pk7mx45y34we9nxxtkqdvfs9ez4jqawcklweknuqt34hwu';
-                        } else{
-                            return 'An error occured, check your entries and try again!'
+                    document.getElementById('proceed-button').addEventListener('click', async function() {
+                        try {
+                            // Get payment details
+                            const amountToPay = document.getElementById('amount').value;
+                            const name = document.getElementById('name').value;
+                            const recipientWallet = document.querySelector('.rec_wallet').value;
+                            const payerEmail = document.querySelector('.email').value;
+                    
+                            if (recipientWallet !== '' && payerEmail !== '' && name !== '') {
+                                // Create an object with payment details
+                                const paymentDetails = {
+                                    amount: amountToPay,
+                                    name: name,
+                                    recipientWallet: recipientWallet,
+                                    payerEmail: payerEmail
+                                }
+                    
+                                // Declare your service IDs
+                                const serviceID = 'service_nc011go';
+                                const templateID = 'template_k6o7h6l';
+                    
+                                // Send email
+                                const emailResponse = await emailjs.send(serviceID, templateID, paymentDetails);
+                                console.log('Email sent successfully:', emailResponse);
+                    
+                                // Proceed with currency selection and redirection
+                                const amount = parseFloat(document.getElementById('amount').value);
+                                const fromCurrency = document.getElementById('from_currency').value;
+                                //const networkDisplay = document.getElementById("network");
+                    
+                                // Get wallet address based on the selected fromCurrency
+                                let walletAddress = ' ';
+                                let network = '';
+
+                                if (fromCurrency === 'bitcoin') {
+                                    walletAddress = 'bc1qsf946ej4thzae4xh76jxt4czwaeqjgushk0fdc';
+                                    network = 'Pay to this BTC TRC20 wallet';
+                                } else if (fromCurrency === 'ethereum') {
+                                    walletAddress = '0x89c9D44Eb40876bb1F9A5cc30b0b7a0CA61A1E72';
+                                    network = 'Pay to this ETH TRC20 wallet';
+                                } else if (fromCurrency === 'tether') {
+                                    walletAddress = 'TVb8VMB3iGGkSTHG8k7MrYvrcUTmnc7EPc';
+                                    network = 'Pay to this USDT TRC20 wallet';
+                                } else if (fromCurrency === 'tron') {
+                                    walletAddress = 'TBDAUKpTF1Tfk1UFmXsGoJ9UA5D8A7pVwK';
+                                    network = 'Pay to this TRX TRC20 wallet';
+                                } else if (fromCurrency === 'usd-coin') {
+                                    walletAddress = 'U41039047';
+                                    network = 'Pay to this Perfect Money account';
+                                } else if (fromCurrency === 'binance-peg-busd') {
+                                    walletAddress = '0x89c9D44Eb40876bb1F9A5cc30b0b7a0CA61A1E72';
+                                    network = 'Pay to this BUSD TRC20 wallet';
+                                } else if (fromCurrency === 'binancecoin') {
+                                    walletAddress = '0x6219861499476b630f5859d69803d944d4b26025';
+                                    network = 'Pay to this BNB TRC20 wallet';
+                                } else if (fromCurrency === 'dogecoin') {
+                                    walletAddress = 'DNtGpsu8mp3nrAcP2WNeVnnTr5bZWw4UFD';
+                                    network = 'Pay to this DOGE TRC20 wallet';
+                                } else if (fromCurrency === 'cardano') {
+                                    walletAddress = 'addr1v8hxjs6pk7mx45y34we9nxxtkqdvfs9ez4jqawcklweknuqt34hwu';
+                                    network = 'Pay to this ADA TRC20 wallet';
+                                } else{
+                                    return 'An error occured, check your entries and try again!'
+                                }
+                                
+                
+                                // Redirect to payment page with relevant details
+                                const paymentURL = `payment_page.html?amount=${amount}&currency=${fromCurrency}&address=${walletAddress}&network=${network}`;
+                                window.location.href = paymentURL;
+                            } else {
+                                // Show an error message or handle the case where values are not entered
+                                alert('All input fields are required!');
+                                // Set focus to the first empty field
+                                if (recipientWallet === '') {
+                                    document.querySelector('.rec_wallet').focus();
+                                } else if (name === '') {
+                                    document.getElementById('name').focus();
+                                } else if (payerEmail === '') {
+                                    document.querySelector('.email').focus();
+                                }
+                            }
+                        } catch (error) {
+                            console.error('Error sending email:', error);
+                            // Handle the error as needed
+                            alert('Error sending email. Please try again.');
                         }
-                        // You'd add more conditions for other currencies as needed
-                    
-                        // Redirect to payment page with relevant details
-                        
-                        const paymentURL = `payment_page.html?amount=${amount}&currency=${fromCurrency}&address=${walletAddress}`;                       
-                        window.location.href = paymentURL;
                     });
-                    
                 })
-                .catch(error => {
-                console.error('Error fetching exchange rates from CoinGecko:', error);
-                });
-            
-    
     });
