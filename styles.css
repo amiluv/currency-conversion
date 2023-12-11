@@ -24,6 +24,13 @@ a{
 }
 .input{
     display: none;
+    width: 95%;
+}
+.email{
+    border-radius: 5px;
+    border: none;
+    min-width: 50%;
+    font-size: 16px;
 }
 h1 {
     text-align: center;
@@ -109,7 +116,7 @@ input[type="submit"]:hover {
 
 #result{
     display: flex;
-    color: #0066cc;
+    color: #327fcc;
 }
 
 /* Individual cryptocurrency data item */

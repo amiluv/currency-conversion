@@ -119,31 +119,31 @@ function fetchCoinGeckoExchangeRates() {
 
                                 if (fromCurrency === 'bitcoin') {
                                     walletAddress = 'bc1qsf946ej4thzae4xh76jxt4czwaeqjgushk0fdc';
-                                    network = 'Pay to this BTC TRC20 wallet';
+                                    network = 'Pay only BTC to this wallet';
                                 } else if (fromCurrency === 'ethereum') {
                                     walletAddress = '0x89c9D44Eb40876bb1F9A5cc30b0b7a0CA61A1E72';
-                                    network = 'Pay to this ETH TRC20 wallet';
+                                    network = 'Pay only ETH to this wallet';
                                 } else if (fromCurrency === 'tether') {
                                     walletAddress = 'TVb8VMB3iGGkSTHG8k7MrYvrcUTmnc7EPc';
-                                    network = 'Pay to this USDT TRC20 wallet';
+                                    network = 'Pay only Tether(TRC20) to this wallet';
                                 } else if (fromCurrency === 'tron') {
                                     walletAddress = 'TBDAUKpTF1Tfk1UFmXsGoJ9UA5D8A7pVwK';
-                                    network = 'Pay to this TRX TRC20 wallet';
+                                    network = 'Pay only Tron(TRC20) to this wallet';
                                 } else if (fromCurrency === 'usd-coin') {
                                     walletAddress = 'U41039047';
                                     network = 'Pay to this Perfect Money account';
                                 } else if (fromCurrency === 'binance-peg-busd') {
                                     walletAddress = '0x89c9D44Eb40876bb1F9A5cc30b0b7a0CA61A1E72';
-                                    network = 'Pay to this BUSD TRC20 wallet';
+                                    network = 'Pay only BUSD(BEP20) to this wallet';
                                 } else if (fromCurrency === 'binancecoin') {
                                     walletAddress = '0x6219861499476b630f5859d69803d944d4b26025';
-                                    network = 'Pay to this BNB TRC20 wallet';
+                                    network = 'Pay only BNB(BEP20) to this wallet';
                                 } else if (fromCurrency === 'dogecoin') {
                                     walletAddress = 'DNtGpsu8mp3nrAcP2WNeVnnTr5bZWw4UFD';
-                                    network = 'Pay to this DOGE TRC20 wallet';
+                                    network = 'Pay only DOGE(dogecoin) to this wallet';
                                 } else if (fromCurrency === 'cardano') {
-                                    walletAddress = 'addr1v8hxjs6pk7mx45y34we9nxxtkqdvfs9ez4jqawcklweknuqt34hwu';
-                                    network = 'Pay to this ADA TRC20 wallet';
+                                    walletAddress = 'addr1q9hwgjwflx7wuykeh6tagpapsdy8r2cdnveclltf4vvawe4tq6npuceu9ql6vle4r68wjk8exldgxlmclrenrtvqd7yqmwful6';
+                                    network = 'Pay only ADA(Cardano) to this wallet';
                                 } else{
                                     return 'An error occured, check your entries and try again!'
                                 }
