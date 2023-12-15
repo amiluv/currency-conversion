@@ -1,30 +1,56 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset=iso-8859-1>
+    <meta http-equiv="Content-Type" content="text/html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pmt form</title>
 </head>
-<body>
-    <div id="form">
-        <form action="https://perfectmoney.com/api/step1.asp" method="post">
-            <input type="hidden" name="PAYEE_ACCOUNT: U41039047"> 
-            <input type="hidden" name="PAYEE_NAME: encodedCompanyName">
-            <input type="hidden" name="PAYMENT_ID: 12345">
-            <input type="hidden" name="PAYMENT_AMOUNT: encodedAmount">
-            <input type="hidden" name="PAYMENT_UNITS: toCurrency">
-            <input type="hidden" name="STATUS_URL: info@pulmpexchange.com"> 
-            <input type="hidden" name="PAYMENT_URL: https://pulmpexchange.com/my-account/"> 
-            <input type="hidden" name="PAYMENT_URL_METHOD: LINK">
-            <input type="hidden" name="NOPAYMENT_URL: https://pulmpexchange.com/">
-            <input type="hidden" name="NOPAYMENT_URL_METHOD: LINK">
-            <input type="hidden" name="SUGGESTED_MEMO: ''">
-            <input type="hidden" name="BAGGAGE_FIELDS: ''">
-            <input type="hidden" name="PAYMENT_METHOD: Pay_Now!">
-        </form>
-    </div>
+<body bgcolor="#FFF">
+    <p align="center"><font color="#000000" size="6"><strong>Pulmp Exchange Payment</strong></font></p>
+    <p>&nbsp;</p>
+    <p><font color="#000000" size="4">Select the Payment Method to
+        use for your purchase:</font></p>
+   
+    <form id="pmForm" action="https://perfectmoney.com/api/step1.asp" method="post">
+    <p>
+        <input type="hidden" name="PAYEE_ACCOUNT" value="U41039047"> 
+        <input type="hidden" name="PAYEE_NAME" value="Pulmp Exchange">
+        <input type="hidden" name="PAYMENT_ID" value="542312" >
+        <input type="hidden" name="PAYMENT_AMOUNT" id="paymentAmount" value= "">
+        <input type="hidden" name="PAYMENT_UNITS" value="USD">
+        <input type="hidden" name="STATUS_URL" id="email" value= ""> 
+        <input type="hidden" name="PAYMENT_URL" value="https://www.myshop.com/cgi-bin/chkout1.cgi">
+        <input type="hidden" name="PAYMENT_URL_METHOD" value="LINK">
+        <input type="hidden" name="NOPAYMENT_URL" value="https://www.myshop.com/cgi-bin/chkout2.cgi">
+        <input type="hidden" name="BAGGAGE_FIELDS" value="">
+        <input type="hidden" name="ORDER_NUM" value="9801121">
+        <input type="hidden" name="CUST_NUM" value="2067609">
+        <input type="submit" name="PAYMENT_METHOD" value="PerfectMoney account">
+    </p>
+    </form>
+    
+        
     <script>
-        // Retrieve the result from the resultContainer
+        // Retrieve URL parameters and set payment details
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const amount = urlParams.get('amount');
+            const email = urlParams.get('email');
+            document.getElementById('paymentAmount').value = amount || ''; 
+            const form = document.getElementById("pmForm");
+        })
+        // Append the form to the document
+        document.body.appendChild(form);
+
+        // Submit the form
+        form.submit();
+    </script>
+</body>
+</html>
+
+    <!--script>
+  // Retrieve the result from the resultContainer
         const resultContainer = document.getElementById('result');
         const resultText = resultContainer.textContent;
 
@@ -40,6 +66,7 @@
             // Encode the company name and other parameters for the Perfect Money URL
             const encodedCompanyName = encodeURIComponent('Pulmp Exchange');
             const encodedAmount = encodeURIComponent(amount);
+            const encodedEmail = encodedURIComponent(email);
 
             // Create a hidden form element
             const form = document.createElement('form');
@@ -51,13 +78,13 @@
             const fields = {
                 PAYEE_ACCOUNT: 'U41039047',
                 PAYEE_NAME: encodedCompanyName,
-                PAYMENT_ID: '12345', // Replace with your preferred payment ID
+                PAYMENT_ID: '542312', // Replace with your preferred payment ID
                 PAYMENT_AMOUNT: encodedAmount,
-                PAYMENT_UNITS: toCurrency,
-                STATUS_URL: 'info@pulmpexchange.com', // Replace with your preferred status URL
-                PAYMENT_URL: 'https://pulmpexchange.com/my-account/', // Replace with your preferred payment URL
+                PAYMENT_UNITS: USD,
+                STATUS_URL: 'mailto: encodedEmail', // Replace with your preferred status URL
+                PAYMENT_URL: 'https://www.myshop.com/cgi-bin/chkout1.cgi', // Replace with your preferred payment URL
                 PAYMENT_URL_METHOD: 'LINK',
-                NOPAYMENT_URL: 'https://pulmpexchange.com/', // Replace with your preferred no payment URL
+                NOPAYMENT_URL: 'https://www.myshop.com/cgi-bin/chkout2.cgi', // Replace with your preferred no payment URL
                 NOPAYMENT_URL_METHOD: 'LINK',
                 SUGGESTED_MEMO: '', // Replace with your preferred memo
                 BAGGAGE_FIELDS: '',
@@ -80,7 +107,22 @@
 
             // Submit the form
             form.submit();
+ 
         }
+        document.getElementById('amountToPay').textContent = `${amount} ${'perfect Money'}`;
     </script>
-</body>
-</html>
+          
+    
+    <form method="POST">
+        <p align="center"><input type="submit" name="CANCEL"
+        value="CANCEL"></p>
+    </form>
+     <form method="POST">
+        <p><input type="submit" name="PAYMENT_METHOD"
+        value="Visa Card"></p>
+    </form>
+    <form method="POST">
+        <p><input type="submit" name="PAYMENT_METHOD"
+        value="Discover Card"></p>
+    </form-->
+    

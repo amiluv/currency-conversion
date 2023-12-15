@@ -41,12 +41,53 @@ document.addEventListener('DOMContentLoaded', function() {
     const amount = urlParams.get('amount');
     const currency = urlParams.get('currency');
     const address = urlParams.get('address');
-    const network = urlParams.get('network')
-
+    const network = urlParams.get('network');
+    const email = urlParams.get('email');
+    
     if (currency === 'usd-coin'){
-        document.getElementById('amountToPay').textContent = `${amount} ${'perfect Money'}`;
-        //window.location.href = 'pmpmt.html'
-    }else {
+        // Encode the company name and other parameters for the Perfect Money URL
+        const encodedAmount = encodeURIComponent(amount);
+        
+        // Create a hidden form element
+        const form = document.createElement('form');
+        form.setAttribute('action', 'https://perfectmoney.com/api/step1.asp');
+        form.setAttribute('method', 'POST');
+        form.style.display = 'none';
+        
+        // Define form fields and values
+        const fields = {
+            PAYEE_ACCOUNT: 'U41039047',
+            PAYEE_NAME: "Pulmp Exchange",
+            PAYMENT_ID: '542312', // Replace with your preferred payment ID
+            PAYMENT_AMOUNT: encodedAmount,
+            PAYMENT_UNITS: 'USD',
+            STATUS_URL: 'https://www.myshop.com/cgi-bin/xact.cgi', // Replace with your preferred status URL 
+            PAYMENT_URL: 'https://www.myshop.com/cgi-bin/chkout1.cgi', // Replace with your preferred paymentURL
+            PAYMENT_URL_METHOD: 'LINK',
+            NOPAYMENT_URL: 'https://www.myshop.com/cgi-bin/chkout2.cgi', // Replace with your preferred nopayment URL
+            NOPAYMENT_URL_METHOD: 'LINK',
+            SUGGESTED_MEMO: '', // Replace with your preferred memo
+            BAGGAGE_FIELDS: '',
+            PAYMENT_METHOD: 'Pay_Now!'
+        };
+        // Loop through fields and create input elements
+        for (const fieldName in fields) {
+            if (fields.hasOwnProperty(fieldName)) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = fieldName;
+                input.value = fields[fieldName];
+                form.appendChild(input);
+            }
+        }
+        // Append the form to the document
+        document.body.appendChild(form);
+        // Submit the form
+        form.submit();
+    }
+    
+        
+    else {
         document.getElementById('amountToPay').textContent = `${amount} ${currency}`;
         
     }
@@ -64,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 document.querySelector('.proceed-btn').addEventListener('click', function() {
-    alert("Payment captured sucessfully, click 'OK' to proceed");
+    alert("Payment captured successfully, click 'OK' to proceed");
     console.log('Email sent successfully');
     setTimeout(function() {
         window.location.href = 'thank_you.html';

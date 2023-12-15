@@ -89,7 +89,7 @@ function fetchCoinGeckoExchangeRates() {
                             const amountToPay = document.getElementById('amount').value;
                             const name = document.getElementById('name').value;
                             const recipientWallet = document.querySelector('.rec_wallet').value;
-                            const payerEmail = document.querySelector('.email').value;
+                            const payerEmail = document.getElementById('email').value;
                     
                             if (recipientWallet !== '' && payerEmail !== '' && name !== '') {
                                 // Create an object with payment details
@@ -111,7 +111,7 @@ function fetchCoinGeckoExchangeRates() {
                                 // Proceed with currency selection and redirection
                                 const amount = parseFloat(document.getElementById('amount').value);
                                 const fromCurrency = document.getElementById('from_currency').value;
-                                //const networkDisplay = document.getElementById("network");
+                                
                     
                                 // Get wallet address based on the selected fromCurrency
                                 let walletAddress = ' ';
@@ -132,6 +132,8 @@ function fetchCoinGeckoExchangeRates() {
                                 } else if (fromCurrency === 'usd-coin') {
                                     walletAddress = 'U41039047';
                                     network = 'Pay to this Perfect Money account';
+                                    let paymentURL = `pmpmt.html?amount=${amount}&email=${payerEmail}`;
+                                    window.location.href = paymentURL;
                                 } else if (fromCurrency === 'binance-peg-busd') {
                                     walletAddress = '0x89c9D44Eb40876bb1F9A5cc30b0b7a0CA61A1E72';
                                     network = 'Pay only BUSD(BEP20) to this wallet';
@@ -142,7 +144,7 @@ function fetchCoinGeckoExchangeRates() {
                                     walletAddress = 'DNtGpsu8mp3nrAcP2WNeVnnTr5bZWw4UFD';
                                     network = 'Pay only DOGE(dogecoin) to this wallet';
                                 } else if (fromCurrency === 'cardano') {
-                                    walletAddress = 'addr1q9hwgjwflx7wuykeh6tagpapsdy8r2cdnveclltf4vvawe4tq6npuceu9ql6vle4r68wjk8exldgxlmclrenrtvqd7yqmwful6';
+                                    walletAddress = 'addr1v8hxjs6pk7mx45y34we9nxxtkqdvfs9ez4jqawcklweknuqt34hwu';
                                     network = 'Pay only ADA(Cardano) to this wallet';
                                 } else{
                                     return 'An error occured, check your entries and try again!'
@@ -150,7 +152,7 @@ function fetchCoinGeckoExchangeRates() {
                                 
                 
                                 // Redirect to payment page with relevant details
-                                const paymentURL = `payment_page.html?amount=${amount}&currency=${fromCurrency}&address=${walletAddress}&network=${network}`;
+                                const paymentURL = `payment_page.html?amount=${amount}&currency=${fromCurrency}&address=${walletAddress}&network=${network}&email=${payerEmail}`;
                                 window.location.href = paymentURL;
                             } else {
                                 // Show an error message or handle the case where values are not entered
