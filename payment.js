@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
             STATUS_URL: 'https://www.myshop.com/cgi-bin/xact.cgi', // Replace with your preferred status URL 
             PAYMENT_URL: 'https://www.myshop.com/cgi-bin/chkout1.cgi', // Replace with your preferred paymentURL
             PAYMENT_URL_METHOD: 'LINK',
-            NOPAYMENT_URL: 'https://www.myshop.com/cgi-bin/chkout2.cgi', // Replace with your preferred nopayment URL
+            NOPAYMENT_URL: 'https://pulmpexchange.com/exchange', // Replace with your preferred nopayment URL https://www.myshop.com/cgi-bin/chkout2.cgi
             NOPAYMENT_URL_METHOD: 'LINK',
             SUGGESTED_MEMO: '', // Replace with your preferred memo
             BAGGAGE_FIELDS: '',

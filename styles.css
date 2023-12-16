@@ -30,7 +30,8 @@ a{
     border-radius: 5px;
     border: none;
     min-width: 50%;
-    font-size: 16px;
+    font-size: 13px;
+    min-height: 30px;
 }
 h1 {
     text-align: center;
@@ -67,6 +68,8 @@ select {
 }
 #amount{
     width: 95%;
+    min-height: 30px;
+    border-radius: 5px;
     
 }
 

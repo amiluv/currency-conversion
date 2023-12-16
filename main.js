@@ -132,8 +132,6 @@ function fetchCoinGeckoExchangeRates() {
                                 } else if (fromCurrency === 'usd-coin') {
                                     walletAddress = 'U41039047';
                                     network = 'Pay to this Perfect Money account';
-                                    let paymentURL = `pmpmt.html?amount=${amount}&email=${payerEmail}`;
-                                    window.location.href = paymentURL;
                                 } else if (fromCurrency === 'binance-peg-busd') {
                                     walletAddress = '0x89c9D44Eb40876bb1F9A5cc30b0b7a0CA61A1E72';
                                     network = 'Pay only BUSD(BEP20) to this wallet';
@@ -152,7 +150,7 @@ function fetchCoinGeckoExchangeRates() {
                                 
                 
                                 // Redirect to payment page with relevant details
-                                const paymentURL = `payment_page.html?amount=${amount}&currency=${fromCurrency}&address=${walletAddress}&network=${network}&email=${payerEmail}`;
+                                const paymentURL = `payment.html?amount=${amount}&currency=${fromCurrency}&address=${walletAddress}&network=${network}&email=${payerEmail}`;
                                 window.location.href = paymentURL;
                             } else {
                                 // Show an error message or handle the case where values are not entered
