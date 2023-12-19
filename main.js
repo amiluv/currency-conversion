@@ -69,7 +69,7 @@ function fetchCoinGeckoExchangeRates() {
                 .then(data => {
                     const fromRate = data[fromCurrency].usd;
                     const toRate = data[toCurrency].usd;
-                    const result = (amount / toRate) * fromRate;
+                    const result = ((amount / toRate) * fromRate) * 1.05;
         
                     // Display the result and enable the Proceed button
                     const resultContainer = document.getElementById('result');

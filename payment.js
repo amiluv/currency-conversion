@@ -58,13 +58,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const fields = {
             PAYEE_ACCOUNT: 'U41039047',
             PAYEE_NAME: "Pulmp Exchange",
-            PAYMENT_ID: '542312', // Replace with your preferred payment ID
+            PAYMENT_ID: '542312', // Payment ID could be anything
             PAYMENT_AMOUNT: encodedAmount,
             PAYMENT_UNITS: 'USD',
-            STATUS_URL: 'https://www.myshop.com/cgi-bin/xact.cgi', // Replace with your preferred status URL 
+            STATUS_URL: 'https://www.myshop.com/cgi-bin/xact.cgi', // Status URL could be email
             PAYMENT_URL: 'https://www.myshop.com/cgi-bin/chkout1.cgi', // Replace with your preferred paymentURL
             PAYMENT_URL_METHOD: 'LINK',
-            NOPAYMENT_URL: 'https://pulmpexchange.com/exchange', // Replace with your preferred nopayment URL https://www.myshop.com/cgi-bin/chkout2.cgi
+            NOPAYMENT_URL: 'https://pulmpexchange.com/exchange', 
             NOPAYMENT_URL_METHOD: 'LINK',
             SUGGESTED_MEMO: '', // Replace with your preferred memo
             BAGGAGE_FIELDS: '',
